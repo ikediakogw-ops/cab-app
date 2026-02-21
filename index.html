@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>QuickRide — Your Ride, Anytime</title>
+
+<style>
+:root {
+    --yellow: #f4b400;
+    --black: #0f0f0f;
+    --card: #1a1a1a;
+    --text: #eaeaea;
+    --muted: #9ca3af;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--black);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    background:
+        radial-gradient(circle at top right, rgba(244,180,0,0.15), transparent 40%),
+        radial-gradient(circle at bottom left, rgba(244,180,0,0.1), transparent 40%);
+}
+
+.hero-inner {
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.hero h1 span {
+    color: var(--yellow);
+}
+
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--muted);
+    max-width: 500px;
+}
+
+/* FORM CARD */
+.ride-form {
+    background: var(--card);
+    border-radius: 16px;
+    padding: clamp(24px, 5vw, 40px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+
+.ride-form h2 {
+    margin-bottom: 25px;
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    background: #0b0b0b;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23f4b400' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--yellow);
+}
+
+/* BUTTON */
+.btn {
+    width: 100%;
+    padding: 16px;
+    margin-top: 10px;
+    border-radius: 12px;
+    border: none;
+    background: var(--yellow);
+    color: #000;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(244,180,0,0.35);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* RESULT */
+#result {
+    margin-top: 25px;
+    padding: 18px;
+    background: #0b0b0b;
+    border-left: 4px solid var(--yellow);
+    border-radius: 10px;
+    display: none;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FEATURES */
+.features {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.feature {
+    background: var(--card);
+    padding: 35px;
+    border-radius: 16px;
+    border: 1px solid #222;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.feature:hover {
+    transform: translateY(-4px);
+    border-color: var(--yellow);
+}
+
+.feature .icon {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    margin-bottom: 10px;
+    color: var(--yellow);
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .hero p {
+        margin: 0 auto;
+    }
+
+    .features {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 25px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+    .hero {
+        padding: 40px 16px;
+        min-height: auto;
+    }
+
+    .hero-inner {
+        gap: 30px;
+    }
+
+    .ride-form {
+        padding: 24px;
+    }
+
+    .ride-form h2 {
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    label {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+
+    input, select {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    select {
+        background-position: right 12px center;
+        padding-right: 36px;
+    }
+
+    .btn {
+        padding: 14px;
+        font-size: 1rem;
+    }
+
+    #result {
+        padding: 16px;
+        margin-top: 20px;
+        font-size: 0.95rem;
+    }
+
+    .features {
+        padding: 40px 16px;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .feature {
+        padding: 28px;
+    }
+
+    .feature .icon {
+        font-size: 2.5rem;
+    }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 375px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .ride-form {
+        padding: 20px;
+    }
+
+    .feature {
+        padding: 24px;
+    }
+}
+
+/* LANDSCAPE MOBILE */
+@media (max-width: 900px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 40px 20px;
+    }
+}
+
+/* TOUCH DEVICE OPTIMIZATIONS */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover {
+        transform: none;
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    .feature:hover {
+        transform: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="hero-inner">
+        <div>
+            <h1>Quick<span>Ride</span> Abuja</h1>
+            <p>Reliable hailing service within Abuja. No stress. No stories.</p>
+        </div>
+
+        <div class="ride-form">
+            <h2>Book a Ride</h2>
+
+            <div class="form-group">
+                <label>Pickup Area</label>
+                <select id="pickup">
+                    <option value="">Select pickup area</option>
+                    <option>Wuse</option>
+                    <option>Garki</option>
+                    <option>Maitama</option>
+                    <option>Asokoro</option>
+                    <option>Gwarinpa</option>
+                    <option>Jabi</option>
+                    <option>Utako</option>
+                    <option>Lugbe</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Destination Area</label>
+                <select id="destination">
+                    <option value="">Select destination</option>
+                    <option>Wuse</option>
+                    <option>Garki</option>
+                    <option>Maitama</option>
+                    <option>Asokoro</option>
+                    <option>Gwarinpa</option>
+                    <option>Jabi</option>
+                    <option>Utako</option>
+                    <option>Lugbe</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Ride Category</label>
+                <select id="ride-type">
+                    <option value="Economy|2500">Economy — ₦2,500</option>
+                    <option value="Comfort|3500">Comfort — ₦3,500</option>
+                    <option value="Premium|6000">Premium — ₦6,000</option>
+                </select>
+            </div>
+
+            <button class="btn" onclick="bookRide()">Confirm Ride</button>
+            <div id="result"></div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <div class="icon"></div>
+        <h3>Abuja-Focused</h3>
+        <p>Built specifically for movement within the FCT.</p>
+    </div>
+
+    <div class="feature">
+        <div class="icon"></div>
+        <h3>Naira Pricing</h3>
+        <p>Upfront ₦ pricing. No hidden charges.</p>
+    </div>
+
+    <div class="feature">
+        <div class="icon"></div>
+        <h3>Verified Drivers</h3>
+        <p>Drivers familiar with Abuja routes.</p>
+    </div>
+</section>
+
+
+<script>
+function bookRide() {
+    const pickup = document.getElementById("pickup").value;
+    const destination = document.getElementById("destination").value;
+    const rideValue = document.getElementById("ride-type").value;
+    const result = document.getElementById("result");
+
+    if (!pickup || !destination) {
+        alert("Please select pickup and destination areas.");
+        return;
+    }
+
+    if (pickup === destination) {
+        alert("Pickup and destination cannot be the same.");
+        return;
+    }
+
+    const [rideType, price] = rideValue.split("|");
+
+    const eta = Math.floor(Math.random() * 4) + 3; // 3–6 mins
+    const driverAreas = ["Maitama", "Gwarinpa", "Wuse", "Jabi"];
+    const driverFrom = driverAreas[Math.floor(Math.random() * driverAreas.length)];
+
+    result.style.display = "block";
+    result.innerHTML = `
+        <strong style="color:#f4b400">Ride Confirmed 🚗</strong><br><br>
+        <b>Pickup:</b> ${pickup}<br>
+        <b>Destination:</b> ${destination}<br>
+        <b>Category:</b> ${rideType}<br>
+        <b>Fare:</b> ₦${Number(price).toLocaleString()}<br><br>
+        Nearest driver coming from <b>${driverFrom}</b><br>
+        <span style="color:#f4b400">Arrival in ${eta} minutes</span>
+    `;
+}
+</script>
+
+</body>
+
+
+</body>
+</html>
